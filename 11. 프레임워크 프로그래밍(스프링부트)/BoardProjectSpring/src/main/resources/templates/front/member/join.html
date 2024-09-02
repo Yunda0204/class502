@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+
+<main layout:fragment="content">
+    <h1 th:text="#{회원가입}"></h1>
+
+    <form name="frmRegist" method="POST" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
+        <!--
+             name="frmRegist"
+        폼의 이름을 설정합니다. JavaScript로 폼을 참조할 때 사용될 수 있습니다.
+
+        method="POST"
+        폼 데이터를 전송할 HTTP 메서드를 지정합니다. 여기서는 POST 메서드를 사용하여 데이터를 서버로 전송합니다.
+
+        th:action="@{/member/join}"
+        th:action은 Thymeleaf 속성으로, 폼의 액션 URL을 동적으로 설정합니다. @{/member/join}은 Spring MVC에서 /member/join 경로로 폼 데이터를 전송하도록 합니다.
+
+        @{...} 구문은 컨텍스트 루트를 기준으로 URL을 생성합니다. 예를 들어, 애플리케이션의 기본 경로가 /myapp라면, 실제 URL은 /myapp/member/join이 됩니다.
+
+        autocomplete="off"
+        브라우저의 자동 완성 기능을 비활성화합니다. 이는 보안 또는 사용자 경험을 이유로 폼 필드에 이전에 입력한 값이 자동으로 채워지는 것을 막기 위해 사용됩니다.
+
+        th:object="${requestJoin}"
+        th:object는 Thymeleaf 속성으로, 폼에서 사용될 모델 객체를 지정합니다. 여기서는 ${requestJoin}이라는 모델 객체를 폼의 기본 객체로 사용합니다.
+        이 속성을 통해 폼 필드의 값을 requestJoin 객체의 속성과 바인딩할 수 있습니다.
+             -->
+
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        <!--
+              <div class="error global">
+
+        이 <div> 태그는 글로벌 에러 메시지를 표시하기 위한 컨테이너입니다.
+        class="error global"은 CSS 클래스로, 에러 메시지 스타일링을 위해 사용됩니다.
+        th:each="err : ${#fields.globalErrors()}"
+
+        th:each는 Thymeleaf의 반복문 속성입니다. #fields.globalErrors()는 글로벌 에러 메시지 목록을 반환합니다.
+        err 변수는 반복문 내에서 각각의 에러 메시지를 나타냅니다.
+        th:text="${err}"
+
+        th:text는 태그의 텍스트 내용을 동적으로 설정하는 Thymeleaf 속성입니다. 여기서는 err 변수의 값을 텍스트로 설정합니다.
+              -->
+
+        <dl>
+            <dt th:text="#{이메일}"></dt>
+            <dd>
+                <input type="text" name="email" th:field="*{email}">
+                <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <!--
+        <dl> 태그
+        dl은 정의 리스트로, dt(정의 제목)와 dd(정의 내용) 쌍으로 구성됩니다.
+
+        <dt th:text="#{이메일}"></dt>
+        dt 태그는 폼 필드의 레이블을 나타냅니다.
+
+        th:text="#{이메일}"은 메시지 프로퍼티 파일에서 이메일 키에 해당하는 값을 가져와 텍스트로 설정합니다. 이는 국제화를 지원하기 위한 방법입니다.
+
+        <dd> 태그
+        dd 태그는 실제 입력 필드와 에러 메시지를 포함하는 컨테이너입니다.
+
+        <input type="text" name="email" th:field="*{email}">
+        input 태그는 사용자가 이메일을 입력하는 필드입니다.
+
+        th:field="*{email}"은 RequestJoin 객체의 email 속성과 바인딩됩니다. 폼이 제출되면 이 값은 서버로 전송됩니다.
+
+        에러 메시지 표시 <div> 태그
+        <div class="error">는 이메일 필드에 대한 에러 메시지를 표시합니다.
+
+        th:each="err : ${#fields.errors('email')}"는 email 필드에 대한 모든 에러 메시지를 반복하며, 각 에러 메시지를 err 변수로 처리합니다.
+
+        th:text="${err}"는 err 변수의 값을 텍스트로 설정하여 에러 메시지를 표시합니다.
+
+        요약
+        이 코드는 글로벌 에러 메시지와 개별 필드에 대한 에러 메시지를 Thymeleaf 템플릿에서 동적으로 표시하는 방법을 보여줍니다.
+        th:each를 사용하여 에러 메시지를 반복 처리하고, th:text를 통해 메시지 내용을 설정합니다.
+        이러한 방식으로 사용자는 입력 폼에 대한 실시간 피드백을 받을 수 있습니다.
+        -->
+
+
+        <dl>
+            <dt th:text="#{비밀번호}"></dt>
+            <dd>
+                <input type="password" name="password" th:field="*{password}">
+                <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{비밀번호_확인}"></dt>
+            <dd>
+                <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
+                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{회원명}"></dt>
+            <dd>
+                <input type="text" name="userName" th:field="*{userName}">
+                <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{휴대전화번호}"></dt>
+            <dd>
+                <input type="text" name="mobile" th:field="*{mobile}">
+                <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <div class="terms">
+            <div class="tit" th:text="#{회원가입_약관}"></div>
+            <div class="terms-contents">회원가입 약관...</div>
+
+            <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
+            <label for="agree" th:text="#{회원가입_약관_동의}"></label>
+
+            <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
+        </div>
+        <div class="buttons">
+            <button type="reset" th:text="#{다시입력}"></button>
+            <button type="submit" th:text="#{가입하기}"></button>
+        </div>
+    </form>
+</main>
+</html>
