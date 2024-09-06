@@ -1,11 +1,12 @@
 import React from 'react';
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
 import MessageBox from '@/app/commons/components/MessageBox';
+import styles from '../todo.module.css';
 
 const TodoForm = ({ onSubmit, onChange, onClick, form, titleRef, errors }) => {
   return (
     <form autoComplete="off" onSubmit={onSubmit}>
-      <dl>
+      <dl className="{styles.item}">
         <dt>할일</dt>
         <dd>
           <input

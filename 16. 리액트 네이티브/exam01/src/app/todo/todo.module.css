@@ -1,0 +1,20 @@
+.item{
+
+display: flex;
+}
+
+.item dt{
+    width:100px;
+}
+
+.itemd dd{
+    flex-grow: 1;
+}
+
+/* 공통 CSS */
+/*
+:global .tit {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+    */
