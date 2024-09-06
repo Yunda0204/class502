@@ -4,14 +4,10 @@ import { produce } from 'immer';
 import TodoForm from '../components/TodoForm';
 import TodoList from '../components/TodoList';
 
-
-
 const TodoContainer = () => {
   const [items, setItems] = useState([]);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
-
-
 
   const titleRef = useRef();
 

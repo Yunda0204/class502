@@ -1,13 +1,12 @@
-.item{
-
-display: flex;
+.item {
+    display: flex;
 }
 
-.item dt{
-    width:100px;
+.item dt {
+    width: 100px;
 }
 
-.itemd dd{
+.item dd {
     flex-grow: 1;
 }
 
@@ -17,4 +16,4 @@ display: flex;
     font-size: 1.3rem;
     font-weight: bold;
 }
-    */
+*/

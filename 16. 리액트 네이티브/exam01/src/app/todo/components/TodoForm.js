@@ -1,13 +1,40 @@
 import React from 'react';
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
+import classNames from 'classnames/bind';
 import MessageBox from '@/app/commons/components/MessageBox';
-import styles from '../todo.module.css';
+import styles from '../todo.module.scss';
+import styled, { css } from 'styled-components';
+
+const commonStyle = css`
+  border: 0;
+  height: 45px;
+  padding: 0 35px;
+  color: #fff;
+`;
+
+const ButtonBox = styled.button`
+  background: ${({ color }) => color ?? 'blues'};
+  font-size: 1.3rem;
+  ${commonStyle}
+  ${({ width }) =>
+    width &&
+    css`
+      width: ${width};
+    `}
+`;
+
+const cx = classNames.bind(styles);
 
 const TodoForm = ({ onSubmit, onChange, onClick, form, titleRef, errors }) => {
+  const active = true;
   return (
     <form autoComplete="off" onSubmit={onSubmit}>
-      <dl className="{styles.item}">
-        <dt>할일</dt>
+      <button type="button" className={cx({ on: active })}>
+        클릭!
+      </button>
+
+      <dl className={styles.item}>
+        <dt className="tit">할일</dt>
         <dd>
           <input
             type="text"
@@ -43,7 +70,9 @@ const TodoForm = ({ onSubmit, onChange, onClick, form, titleRef, errors }) => {
           </span>
         </dd>
       </dl>
-      <button type="submit">할일 등록</button>
+      <ButtonBox type="submit" color="pink" width="300px">
+        할일 등록
+      </ButtonBox>
     </form>
   );
 };
